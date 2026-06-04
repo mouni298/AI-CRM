@@ -42,7 +42,7 @@ inbound event ─► Orchestrator/Router (ADK supervisor)
 
 ## Status
 
-Milestone-based build (see [the plan](#)):
+Milestone-based build (see [`docs/DESIGN.md`](docs/DESIGN.md) and [`docs/DECISIONS.md`](docs/DECISIONS.md)):
 
 - ✅ **M0** — scaffold, CRM store (SQLite + Airtable), synthetic seed, MCP server (14 tools)
 - ✅ **M1** — RAG core: `POST /ingest` + `POST /ask` (retrieval verified 5/5 top-1)
