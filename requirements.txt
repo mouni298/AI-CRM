@@ -1,0 +1,10 @@
+# Agentic CRM MVP — pinned to the versions validated during M0 (Python 3.13).
+google-adk[a2a]==2.1.0
+litellm
+anthropic
+mcp
+chromadb
+fastapi
+uvicorn[standard]
+httpx
+python-dotenv
