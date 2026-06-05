@@ -9,7 +9,7 @@ M0 ships the skeleton + health/CRM-inspection endpoints. Later milestones fill i
 
 from __future__ import annotations
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from . import config
@@ -42,6 +42,25 @@ def ingest() -> dict:
 def ask(req: AskRequest) -> dict:
     """Grounded, cited answer over the KB."""
     return rag_retrieve.answer(req.query, req.k)
+
+
+# --- M2: agent flows -------------------------------------------------------
+class EventRequest(BaseModel):
+    kind: str  # currently: "ticket" (deflection). leads/meetings added in M3/M5.
+    id: str
+
+
+@app.post("/event")
+async def event(req: EventRequest) -> dict:
+    """Route an inbound CRM event to the right agent flow.
+
+    M2 handles tickets (deflection); the full classify-and-dispatch orchestrator
+    arrives in M4. Until then this is an explicit per-kind switch."""
+    if req.kind == "ticket":
+        from .agents.deflection import deflect
+
+        return await deflect(req.id)
+    raise HTTPException(status_code=400, detail=f"unsupported event kind: {req.kind!r}")
 
 
 @app.get("/crm/leads")

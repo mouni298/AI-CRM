@@ -46,7 +46,7 @@ Milestone-based build (see [`docs/DESIGN.md`](docs/DESIGN.md) and [`docs/DECISIO
 
 - ✅ **M0** — scaffold, CRM store (SQLite + Airtable), synthetic seed, MCP server (14 tools)
 - ✅ **M1** — RAG core: `POST /ingest` + `POST /ask` (retrieval verified 5/5 top-1)
-- ⬜ **M2** — deflection agent + eval harness (deflection rate, grounding %)
+- ✅ **M2** — deflection agent (`POST /event`) + eval harness — **action accuracy 100%, deflection rate 67%, grounding 100%, citation accuracy 100%** (15 labeled tickets, ~2.6s/ticket)
 - ⬜ **M3** — qualifier agent · **M4** — orchestrator/router
 - ⬜ **M5** — Researcher→Outreach A2A chain + HITL · **M6** — glass-box trace + governance
 

@@ -1,0 +1,17 @@
+[
+  {"ticket_id": "tic-001", "expected_action": "deflect", "expected_article": "kb-003", "note": "2M-row export → split files (1M cap)"},
+  {"ticket_id": "tic-002", "expected_action": "deflect", "expected_article": "kb-002", "note": "add members + seat cost"},
+  {"ticket_id": "tic-003", "expected_action": "deflect", "expected_article": "kb-001", "note": "password reset email not arriving"},
+  {"ticket_id": "tic-004", "expected_action": "deflect", "expected_article": "kb-004", "note": "API rate limits / 429"},
+  {"ticket_id": "tic-005", "expected_action": "deflect", "expected_article": "kb-010", "note": "SAML SSO with Okta"},
+  {"ticket_id": "tic-006", "expected_action": "deflect", "expected_article": "kb-009", "note": "data retention period"},
+  {"ticket_id": "tic-007", "expected_action": "deflect", "expected_article": "kb-007", "note": "annual → monthly plan change"},
+  {"ticket_id": "tic-008", "expected_action": "deflect", "expected_article": "kb-011", "note": "webhook setup + payload"},
+  {"ticket_id": "tic-009", "expected_action": "deflect", "expected_article": "kb-008", "note": "require 2FA for all members"},
+  {"ticket_id": "tic-010", "expected_action": "deflect", "expected_article": "kb-005", "note": "connect Snowflake + sync cadence"},
+  {"ticket_id": "tic-011", "expected_action": "escalate", "expected_article": null, "note": "invoice/refund dispute"},
+  {"ticket_id": "tic-012", "expected_action": "escalate", "expected_article": null, "note": "data loss, not in Trash"},
+  {"ticket_id": "tic-013", "expected_action": "escalate", "expected_article": null, "note": "legal/DPA redlines"},
+  {"ticket_id": "tic-014", "expected_action": "escalate", "expected_article": null, "note": "feature request"},
+  {"ticket_id": "tic-015", "expected_action": "escalate", "expected_article": null, "note": "suspected aggregation bug"}
+]
