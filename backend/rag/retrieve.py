@@ -70,6 +70,7 @@ def answer(query: str, k: int = 4) -> dict:
             "grounded": False,
         }
 
+    # litellm resolves the provider key from the environment (GROQ_API_KEY, etc.).
     resp = litellm.completion(
         model=config.MODEL_SMART,
         messages=[
@@ -79,7 +80,6 @@ def answer(query: str, k: int = 4) -> dict:
                 "content": f"Sources:\n{_format_sources(chunks)}\n\nQuestion: {query}",
             },
         ],
-        api_key=config.ANTHROPIC_API_KEY or None,
         temperature=0,
     )
     text = resp["choices"][0]["message"]["content"]

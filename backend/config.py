@@ -26,11 +26,14 @@ AIRTABLE_BASE_ID = os.getenv("AIRTABLE_BASE_ID", "")
 CHROMA_PATH = os.getenv("CHROMA_PATH", "data/chroma")
 KB_COLLECTION = os.getenv("KB_COLLECTION", "kb_articles")  # Chroma requires len>=3
 
-# --- LLM (Anthropic via ADK LiteLlm; Gemini = documented fallback) ----------
-# Tiered per the plan: cheap model for triage/retrieval, strong for reasoning.
-MODEL_FAST = os.getenv("MODEL_FAST", "anthropic/claude-haiku-4-5-20251001")
-MODEL_SMART = os.getenv("MODEL_SMART", "anthropic/claude-sonnet-4-6")
-ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
+# --- LLM (Groq via ADK LiteLlm; provider-agnostic) --------------------------
+# Tiered per the plan: cheap/fast model for triage/retrieval, strong for reasoning.
+# LiteLlm reads the provider key (GROQ_API_KEY) from the environment automatically,
+# so swapping providers is just a model-string change (e.g. "anthropic/..." with
+# ANTHROPIC_API_KEY set instead).
+MODEL_FAST = os.getenv("MODEL_FAST", "groq/llama-3.1-8b-instant")
+MODEL_SMART = os.getenv("MODEL_SMART", "groq/llama-3.3-70b-versatile")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
 
 # --- A2A --------------------------------------------------------------------
 OUTREACH_A2A_URL = os.getenv("OUTREACH_A2A_URL", "http://localhost:8001")

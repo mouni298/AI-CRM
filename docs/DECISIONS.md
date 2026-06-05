@@ -32,14 +32,17 @@ during a demo ("feel"). Putting both behind one interface means the agents never
 care which is active.
 **Trade-off:** Two backends to maintain; mitigated by the tight interface surface.
 
-## ADR-003 — Anthropic Claude via ADK's LiteLlm wrapper
-**Decision:** Run Claude (Haiku for triage/retrieval, Sonnet for reasoning/outreach)
-through ADK's `LiteLlm` model wrapper rather than ADK's native Gemini path.
-**Why:** Provider-agnostic, lets us tier cheap vs. strong models per agent, and keeps
-the door open to Gemini as a one-line fallback if ADK+Claude tool-calling ever
-gives trouble.
-**Trade-off:** ADK leans Google-ecosystem (defaults to Gemini, Cloud Trace), so Claude
-goes through an extra adapter; acceptable for the model quality + flexibility.
+## ADR-003 — Groq via ADK's LiteLlm wrapper (provider-agnostic)
+**Decision:** Run Groq-hosted Llama models (3.1 8B for triage/retrieval, 3.3 70B for
+reasoning/outreach) through ADK's `LiteLlm` wrapper rather than ADK's native Gemini
+path. The wrapper keeps the provider behind a model-string + env-key, so Anthropic
+or Gemini is a one-line swap.
+**Why:** Groq has a generous free tier and very low latency (LPU inference), which
+suits an agentic loop making many calls — good for a buildable, runnable portfolio
+demo without per-token cost. Tiering fast vs. strong per agent still applies.
+**Trade-off:** Open-weight Llama models are less capable than frontier Claude/Gemini
+on hard reasoning; if deflection/qualification quality lags, bump MODEL_SMART to a
+larger Groq model or switch the provider (the LiteLlm indirection makes this free).
 
 ## ADR-002 — Google ADK for orchestration (over LangGraph)
 **Decision:** Use Google ADK as the agent framework.
@@ -50,12 +53,3 @@ would have meant tracing *its* internals rather than a clean plan→act→reflec
 own, and a heavier abstraction.
 **Trade-off:** Another framework's conventions; observability is OpenTelemetry-shaped.
 ADK's A2A is the decisive factor (ADR-006).
-
-## ADR-001 — Pivot from CompIntel to Agentic CRM
-**Decision:** Repurpose this repo from "CompIntel" (a competitive-research desk) to a
-multi-agent agentic-CRM system. Prior design archived to `docs/archive/COMPINTEL.md`.
-**Why:** CRM is the richest structured customer dataset most companies own, so it's
-the most natural home for autonomous agents — and the strongest 2026 portfolio
-narrative (orchestration + governance, not just an LLM call). Reuses CompIntel's
-RAG, citation-verification, and glass-box-trace ideas.
-**Trade-off:** Loses the competitive-research framing; the agentic patterns transfer.

@@ -1,8 +1,8 @@
-"""LLM wiring — Anthropic Claude through ADK's LiteLlm wrapper.
+"""LLM wiring — Groq models through ADK's LiteLlm wrapper.
 
 Two tiers per the plan: a fast/cheap model for triage + retrieval, a strong
-model for reasoning/synthesis/outreach. Swapping to Gemini (ADK-native) is a
-config change — set MODEL_FAST/MODEL_SMART to "gemini/..." in .env.
+model for reasoning/synthesis/outreach. Provider-agnostic: swap to Anthropic or
+Gemini by changing MODEL_FAST/MODEL_SMART (and the matching API key) in .env.
 """
 
 from __future__ import annotations
@@ -13,7 +13,7 @@ from . import config
 
 
 def fast() -> LiteLlm:
-    """Cheap model: classification/routing, retrieval, simple summaries."""
+    """Fast/cheap model: classification/routing, retrieval, simple summaries."""
     return LiteLlm(model=config.MODEL_FAST)
 
 

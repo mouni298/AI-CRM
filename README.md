@@ -33,7 +33,7 @@ inbound event ─► Orchestrator/Router (ADK supervisor)
 | Layer | Choice |
 |-------|--------|
 | Orchestration | **Google ADK** (`LlmAgent`, `SequentialAgent`) |
-| LLM | **Anthropic Claude** via ADK `LiteLlm` (Haiku + Sonnet tiers; Gemini fallback) |
+| LLM | **Groq** (Llama 3.1 8B + 3.3 70B tiers) via ADK `LiteLlm`; provider-agnostic |
 | Tools | **MCP** server (14 CRM tools) consumed via `MCPToolset` |
 | Agent-to-agent | **A2A** (`to_a2a()` / `RemoteA2aAgent`) on the Researcher→Outreach seam |
 | CRM store | **SQLite** (default, offline) or **Airtable** (demo feel) behind one interface |
@@ -54,7 +54,7 @@ Milestone-based build (see [`docs/DESIGN.md`](docs/DESIGN.md) and [`docs/DECISIO
 
 ```bash
 python3.13 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env          # add ANTHROPIC_API_KEY (only needed for /ask + agents)
+cp .env.example .env          # add GROQ_API_KEY (only needed for /ask + agents)
 
 .venv/bin/python -m backend.crm.seed     # seed data/crm.db
 .venv/bin/python -m backend.rag.ingest   # build the KB vector index

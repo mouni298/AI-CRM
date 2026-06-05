@@ -101,7 +101,7 @@ tools (MCP catalog), guardrails (confidence/approval/kill-switch), reflection
 | Layer | Choice | Why |
 |-------|--------|-----|
 | Orchestration | **Google ADK** | explicit orchestration primitives + native MCP & A2A; lighter than LangGraph |
-| LLM | **Anthropic Claude** via ADK `LiteLlm` | Haiku for triage/retrieval, Sonnet for reasoning/outreach; Gemini = fallback |
+| LLM | **Groq** (Llama 3.1 8B / 3.3 70B) via ADK `LiteLlm` | fast tier for triage/retrieval, strong tier for reasoning/outreach; provider-agnostic (Anthropic/Gemini swap via model string + key) |
 | Tools | **MCP** server (14 CRM tools) via `MCPToolset` | the standard "agent → tools" interface; one governed action catalog |
 | Agent-to-agent | **A2A** (`to_a2a()`/`RemoteA2aAgent`) on one seam | demonstrates "MCP for tools, A2A for agents" without full distributed overhead |
 | CRM store | **SQLite** (default) or **Airtable**, behind `CRMStore` | offline+reproducible for evals; Airtable for demo "feel"; one-line swap |
